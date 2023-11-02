@@ -1,0 +1,45 @@
+function reverseWordSentence(sentence) 
+{
+  function reverseString(str) 
+  {
+    let reversed = '';
+    for (let i = str.length - 1; i >= 0; i--) 
+    {
+      reversed += str[i];
+    }
+    return reversed;
+  }
+  let reversedSentence = '';
+  let word = '';
+  for (let i = 0; i < sentence.length; i++) 
+  {
+    const char = sentence[i];
+    if (char !== ' ') 
+    {
+      word += char;
+    } 
+    else 
+    {
+      if (word.length > 0) 
+      {
+        const reversedWord = reverseString(word);
+        reversedSentence += reversedWord + ' ';
+        word = '';
+      }
+    }
+  }
+  if (word.length > 0) 
+  {
+    const reversedWord = reverseString(word);
+    reversedSentence += reversedWord;
+  }
+  return reversedSentence;
+}
+const readline = require('readline');
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+rl.question('Enter a sentence: ', function(input) 
+{
+  const reversed = reverseWordSentence(input);
+  console.log('Reversed sentence:', reversed);
+  rl.close();
+});
