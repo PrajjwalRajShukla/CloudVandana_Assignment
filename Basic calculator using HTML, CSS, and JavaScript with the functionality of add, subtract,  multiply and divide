@@ -1,0 +1,235 @@
+<html>
+<head>
+<title>Basic Calculator</title>
+<style>
+body
+{
+    background-color: rgb(169, 169, 169);
+    font-family: Arial, sans-serif; 
+    text-align: center;
+}
+h1
+{
+    font-size: 44px;
+}
+button
+{
+    border: none;
+    background: none;
+    padding: 8px 15px;
+    font-size: 18px; 
+    margin: 7px;
+    cursor: pointer;
+    background-color: black; color: white;
+    outline: none;
+    box-shadow: none;
+}
+#ACButton 
+{
+    background-color: rgb(50, 141, 118);
+    color: white;
+    margin-left: -5px;
+    height: 85px;
+    width: 80px;
+    margin-top: 2px;
+}
+input[type="text"]
+{
+    font-size: 11.5px;
+    box-shadow: white;
+    outline: none;
+    width: 300px; 
+    height: 89px;
+}
+#a9Button
+{
+    background-color: black;
+    color: white;
+    margin-left: 0.5px;
+    height: 85px; 
+    width: 101.8px; 
+    margin-top: -10px;
+}
+#a8Button
+{
+    background-color: black;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 100px;
+    margin-top: -10px;
+}
+#a7Button
+{
+    background-color: black;
+    color: ■white;
+    margin-left: -12px;
+    height: 85px;
+    width: 99px;
+    margin-top: -10px;
+}
+#AddButton
+{
+    background-color: grey;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 80px;
+    margin-top: -10px;
+}
+#a4Button
+{
+    background-color: black; 
+    color: white;
+    margin-left: 0.5px; 
+    height: 85px; 
+    width: 101.8px;
+    margin-top: -10px;
+}
+#a5Button
+{
+    background-color: black;
+    color: ■white;
+    margin-left: -12px;
+    height: 85px;
+    width: 100px;
+    margin-top: -10px;
+}
+#a6Button
+{
+    background-color: black;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 99px;
+    margin-top: -10px;
+}
+#SubButton
+{
+    background-color: grey;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 80px;
+    margin-top: -10px;
+}
+#a1Button
+{
+    background-color: black; 
+    color: white;
+    margin-left: 0.5px; 
+    height: 85px;
+    width: 101.8px;
+    margin-top: -10px;
+}
+#a2Button
+{
+    background-color: black;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 100px;
+    margin-top: -10px;
+}
+#a3Button
+{
+    background-color: black;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 99px;
+    margin-top: -10px;
+}
+#DivButton
+{
+    background-color: grey;
+    color : white;
+    margin-left: -12px;
+    height: 85px;
+    width: 80px;
+    margin-top: -10px;
+}
+#DotButton
+{
+    background-color: black;
+    color: white; 
+    margin-left: 0.5px; 
+    height: 85px; 
+    width: 101.8px;
+    margin-top: -10px;
+}
+#a0Button
+{
+    background-color: black;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 100px;
+    margin-top: -10px;
+}
+#EqualButton
+{
+    background-color: black;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 99px;
+    margin-top: -10px;
+}
+#MulButton
+{
+    background-color: grey;
+    color: white;
+    margin-left: -12px;
+    height: 85px;
+    width: 80px;
+    margin-top: -10px;
+}
+</style>
+</head>
+<body><br>
+<h1>Basic Calculator</h1>
+<div class="calculator">
+<input type="text" id="result" readonly>
+<button id="ACButton" onclick="clearResult()">AC</button> <br>
+<button id="a9Button" onclick="appendToResult('9')">9</button> 
+<button id="a8Button" onclick="appendToResult('8')">8</button> 
+<button id="a7Button" onclick="appendToResult('7')">7</button> 
+<button id="AddButton" onclick="appendToResult('+')">+</button> <br>
+<button id="a4Button" onclick="appendToResult('4')">4</button> 
+<button id="a5Button" onclick="appendToResult('5')">5</button> 
+<button id="a6Button" onclick="appendToResult('6')">6</button> 
+<button id="SubButton" onclick="appendToResult('-')">-</button> <br>
+<button id="a1Button" onclick="appendToResult('1')">1</button> 
+<button id="a2Button" onclick="appendToResult('2')">2</button> 
+<button id="a3Button" onclick="appendToResult('3')">3</button> 
+<button id="DivButton" onclick="appendToResult('/')">÷</button> <br>
+<button id="DotButton" onclick="appendToResult('.')">.</button> 
+<button id="a0Button" onclick="appendToResult('0')">0</button> 
+<button id="EqualButton" onclick="calculateResult()">=</button> 
+<button id="MulButton" onclick="appendToResult('*')">x</button> </div>
+<script>
+function appendToResult(value) 
+{
+    document.getElementById('result').value += value;
+}
+function clearResult() 
+{
+    document.getElementById('result').value = '';
+}
+function calculateResult() 
+{
+    try
+    {
+        const expression = document.getElementById('result').value;
+        const result = eval (expression);
+        document.getElementById('result').value = result;
+    }
+    catch (error)
+    {
+        document.getElementById('result').value = 'Error';
+    }
+}
+</script>
+</body> 
+</html>
