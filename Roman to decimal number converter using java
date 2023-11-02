@@ -1,0 +1,131 @@
+import java.util.Scanner;
+public class Java_code2
+{
+    public static void main(String[] args) 
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a Roman number: ");
+        String romanNumber = toUpperCaseConverter(scanner.nextLine());
+        scanner.close();
+        int decimalValue = romanToDecimal(romanNumber);
+        boolean ValidRomanNumber = validateRoman(romanNumber);
+        if (ValidRomanNumber)
+        {
+            System.out.println("Decimal value: " + decimalValue);
+            System.out.println("The Roman numeral is correct.");
+        } 
+        else 
+        {
+            System.out.println("Invalid Roman numeral.");
+        }
+    }
+    public static int romanToDecimal(String s)
+    {
+        char[] chars = s.toCharArray();
+        int finalresult = 0;
+        int lastValue = 0;
+        for (int i = chars.length - 1; i >= 0; i--) 
+        {
+            char currentChar = chars[i];
+            int currentValue = romanValue(currentChar);
+            if (currentValue == -1)
+            {
+                return -1;
+            }
+            if (currentValue < lastValue)
+            {
+                finalresult -= currentValue;
+            }
+            else
+            {
+                finalresult += currentValue;
+            }
+            lastValue = currentValue;
+        }
+        return finalresult;
+    }
+    public static int romanValue(char romanChar)
+    {
+        switch (romanChar)
+        {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return -1; 
+        }
+    }
+    public static boolean validateRoman(String s)
+    {
+        return !containsInvalidCombinations(s) && !containsInvalidSubtractions(s);
+    }
+    private static boolean containsInvalidCombinations (String s)
+    {
+        String[] invalidCombinations = { "IIII", "W", "XXXX", "LL", "CCCC", "DD", "MMMM" };
+        for (String invalidCombination : invalidCombinations)
+        {
+            if (containsCustom(s, invalidCombination))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static boolean containsInvalidSubtractions(String s)
+    {
+        String[] invalidSubtractions = { "IL", "IC", "ID", "IM", "XD", "XM" };
+        for (String invalidSubtraction : invalidSubtractions)
+        {
+            if (containsCustom (s, invalidSubtraction))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    private static boolean containsCustom (String source, String target) 
+    {
+        char[] sourceLength = source.toCharArray();
+        char[] targetLength = target.toCharArray();
+        for (int i = 0; i <= sourceLength.length - targetLength.length; i++) 
+        {
+            int j;
+            for (j = 0; j < targetLength.length; j++) 
+            {
+                if (sourceLength[i+ j] != targetLength[j]) 
+                {
+                    break;
+                }
+            }
+            if (j == targetLength.length) 
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static String toUpperCaseConverter (String input)
+    {
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++)
+        {
+            char c = chars[i];
+            if (c >= 'a' && c <= 'z') 
+            {
+                chars[i] = (char) (c - 32);
+            }
+        }
+        return new String(chars);
+    }
+}
