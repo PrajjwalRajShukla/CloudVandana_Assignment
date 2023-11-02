@@ -1,0 +1,56 @@
+import java.util.Scanner; 
+public class Java_code3
+{
+    public static void main(String[] args)
+    {
+        Scanner scanner = new Scanner(System.in); 
+        System.out.print("Enter a sentence: ");
+        String input = scanner.nextLine();
+        scanner.close();
+        boolean Pangram = Pangram(input);
+        if (Pangram)
+        {
+            System.out.println("The input is a pangram.");
+        }
+        else
+        {
+            System.out.println("The input is not a pangram.");
+        }
+    }
+    public static boolean Pangram(String input)
+    {
+        int[] charCount = new int[26];
+        input = toLowerCaseConverter(input); 
+        char[] charArray = input.toCharArray();
+        for (int i = 0; i < charArray.length; i++)
+        {
+            char c = charArray[i];
+            if (c >= 'a' && c <= 'z')
+            {
+                charCount[c - 'a']++;
+            }
+        }
+        for (int j = 0; j < charCount.length; j++)
+        {
+            int count = charCount[j];
+            if (count == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static String toLowerCaseConverter(String input)
+    {
+        char[] chars = input.toCharArray();
+        for (int i = 0; i < chars.length; i++)
+        {
+            char c = chars[i];
+            if (c >= 'A' && c <= 'Z')
+            {
+                chars[i] = (char) (c+32);
+            }
+        }
+        return new String(chars);
+    }
+}
